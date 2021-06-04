@@ -1,4 +1,4 @@
 .vscode
-py_cache
+_pycache_
 bin
 venv
