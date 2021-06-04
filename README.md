@@ -1,1 +1,1 @@
-scripts going to be added soon!!!!!!
+django_scripts going to be added soon!!!!!!
