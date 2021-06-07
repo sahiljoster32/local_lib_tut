@@ -82,3 +82,9 @@ class BookInstance(models.Model):
     def __str__(self):
         """String for representing the Model object."""
         return f'{self.id} ({self.book.title})'
+
+
+class Language(models.Model):
+    "to  define the language model acc. to uml chart ...."
+
+    lang = models.CharField(max_length=100, help_text="enter the valid language sign and word, that will be understandable easely")
