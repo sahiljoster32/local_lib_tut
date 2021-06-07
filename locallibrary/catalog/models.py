@@ -41,7 +41,7 @@ class Book(models.Model):
     summary = models.TextField(max_length=1000, help_text='Enter a brief description of the book')
     isbn = models.CharField('ISBN', max_length=13, unique=True,
                              help_text='13 Character <a href="https://www.isbn-international.org/content/what-isbn">ISBN number</a>')
-
+    Lang = models.ForeignKey("Language", on_delete=models.PROTECT, null=True)
     # ManyToManyField used because genre can contain many books. Books can cover many genres.
     # Genre class has already been defined so we can specify the object above.
     genre = models.ManyToManyField(Genre, help_text='Select a genre for this book')
@@ -87,4 +87,7 @@ class BookInstance(models.Model):
 class Language(models.Model):
     "to  define the language model acc. to uml chart ...."
 
-    lang = models.CharField(max_length=100, help_text="enter the valid language sign and word, that will be understandable easely")
+    lang = models.CharField(max_length=100, help_text="enter the valid language sign and word, that will be understandable easily", default="ENGLISH/EN-IN")
+
+    def __str__(self):
+        return self.lang
