@@ -1,0 +1,1 @@
+to run(or want to see the data files) locate db.sqllite3 file with sql studio 
