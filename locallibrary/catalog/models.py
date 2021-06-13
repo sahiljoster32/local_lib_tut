@@ -89,7 +89,7 @@ class BookInstance(models.Model):
 
     def __str__(self):
         """String for representing the Model object."""
-        return f'{self.id} ({self.book.title})'
+        return f'{self.id} ({self.book.title})--{(self.status)}'
 
 
 class Language(models.Model):
@@ -99,3 +99,4 @@ class Language(models.Model):
 
     def __str__(self):
         return self.lang
+
