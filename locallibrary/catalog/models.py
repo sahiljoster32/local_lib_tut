@@ -91,6 +91,18 @@ class BookInstance(models.Model):
         """String for representing the Model object."""
         return f'{self.id} ({self.book.title})--{(self.status)}'
 
+    def status_value(self):
+        key_status = self.status
+        print(key_status)
+        for _,value in self.LOAN_STATUS:
+            # print(value)
+            if _ == key_status:
+                print(value)
+                return value
+
+        
+
+    status_value.short_description = "current"
 
 class Language(models.Model):
     "to  define the language model acc. to uml chart ...."

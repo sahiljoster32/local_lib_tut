@@ -3,10 +3,17 @@ from django.contrib import admin
 # Register your models here.
 from .models import Author, Genre, Book, BookInstance , Language
 
+class bookInline(admin.TabularInline):
+    model = Book
+    fields = ["title","author","Lang"]
+    # list_display = ('title', 'author', 'display_genre')
+
+
 # Define the admin class
 class AuthorAdmin(admin.ModelAdmin):
     list_display = ('last_name', 'first_name', 'date_of_birth', 'date_of_death')
     fields = ['first_name', 'last_name', ('date_of_birth', 'date_of_death')]
+    inlines = [bookInline]
 
 
 # Register the admin class with the associated model
@@ -27,6 +34,8 @@ class BookAdmin(admin.ModelAdmin):
 @admin.register(BookInstance)
 class BookInstanceAdmin(admin.ModelAdmin):
     list_filter = ('status', 'due_back')
+    list_display = ["book", "due_back", "status_value"]
+    
 
     fieldsets = (
         (None, {
