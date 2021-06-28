@@ -36,3 +36,10 @@ class BookListView(generic.ListView):
 
     def get_queryset(self):
         return Book.objects.filter(title__icontains='war')[:5] # Get 5 books containing the title war
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get the context
+        context = super(BookListView, self).get_context_data(**kwargs)
+        # Create any data and add it to the context
+        context['some_data'] = 'This is just some data'
+        return context
