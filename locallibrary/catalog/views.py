@@ -1,3 +1,5 @@
+from xxlimited import Null
+from django.http import request
 from django.shortcuts import render
 from .models import Book, Author, BookInstance, Genre
 from django.views import generic
@@ -49,6 +51,18 @@ class BookListView(generic.ListView):
     #     # Create any data and add it to the context
     #     context['some_data'] = 'This is just some data'
     #     return context
+
+
+def AuthorListView(request):
+    author_objects = Author.objects.all()
+    context = {
+        "Author_list": author_objects,
+    }
+    return render(request, "Author_list.html", context=context)
+
+
+def AuthordetailView(request, pk=Null):
+    author_objects = Author.objects.all()
 
 
 class BookDetailView(generic.DetailView):
