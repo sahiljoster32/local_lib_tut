@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h1>Author: {{ author_name }}</h1>
+<h6>{{author_dob}}</h6>
+<div style="margin-left:20px;margin-top:20px">
+    <h4>Copies</h4>
+    {% if book_lists %}
+    {% for book in book_lists %}
+    <p>{{book.title}}</p>
+    {% endfor %}
+    {% else %}
+    <p>there is no book.</p>
+    {% endif %}
+</div>
+{% endblock %}

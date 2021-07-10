@@ -1,6 +1,6 @@
-from xxlimited import Null
 from django.http import request
 from django.shortcuts import render
+from django.template import context
 from .models import Book, Author, BookInstance, Genre
 from django.views import generic
 
@@ -61,8 +61,17 @@ def AuthorListView(request):
     return render(request, "Author_list.html", context=context)
 
 
-def AuthordetailView(request, pk=Null):
-    author_objects = Author.objects.all()
+def AuthordetailView(request, pk=0):
+    author_object = Author.objects.get(pk=pk)
+    author_name = author_object.__str__()
+    author_dob = author_object.date_of_birth
+    book_objects = Book.objects.filter(author=pk)
+    context = {
+        "author_name": author_name,
+        "author_dob": author_dob,
+        "book_lists": book_objects,
+    }
+    return render(request, "author_detail.html", context=context)
 
 
 class BookDetailView(generic.DetailView):
