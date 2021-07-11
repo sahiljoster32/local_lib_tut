@@ -7,7 +7,9 @@
     <h4>Copies</h4>
     {% if book_lists %}
     {% for book in book_lists %}
-    <p>{{book.title}}</p>
+    <h6><a href="{{book.get_absolute_url}}">{{book.title}}</a>
+        ({{book.author}})</h6>
+    <p>{{book.summary}}</p>
     {% endfor %}
     {% else %}
     <p>there is no book.</p>
