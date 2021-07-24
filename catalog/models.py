@@ -98,7 +98,7 @@ class BookInstance(models.Model):
 
     class Meta:
         ordering = ['due_back']
-        permissions = (("can_mark_returned", "Set book as returned"),)
+        permissions = (("can_mark_librarian", "Set user as librarian"),("noooobie","boobie"))
 
     def __str__(self):
         """String for representing the Model object."""
@@ -108,7 +108,6 @@ class BookInstance(models.Model):
         key_status = self.status
         print(key_status)
         for _, value in self.LOAN_STATUS:
-            # print(value)
             if _ == key_status:
                 print(value)
                 return value

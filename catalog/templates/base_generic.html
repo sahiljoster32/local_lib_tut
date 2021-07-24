@@ -22,11 +22,15 @@
                     <li><a href="{% url 'index' %}">Home</a></li>
                     <li><a href="{% url 'books'%}">All books</a></li>
                     <li><a href="{% url 'author'%}">All authors</a></li>
-                    <br>
-
-                    {% if user.is_authenticated %}
+                    <hr><br>
+                    {% if user.is_authenticated and perms.catalog.can_mark_librarian != True %}
                     <li>User: {{ user.get_username }}</li>
                     <li><a href="{% url 'my-borrowed' %}">My Borrowed</a></li>
+                    <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
+                    <hr><br>
+                    {% elif user.is_authenticated and perms.catalog.can_mark_librarian %}
+                    <li>staff</li>
+                    <li><a href="{% url 'librarians' %}">all borrowed books</a></li>
                     <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
                     {% else %}
                     <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>

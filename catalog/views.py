@@ -4,6 +4,9 @@ from django.template import context
 from .models import Book, Author, BookInstance, Genre
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import permission_required
+
 
 
 def index(request):
@@ -35,7 +38,7 @@ def index(request):
     }
 
     # Render the HTML template index.html with the data in the context variable
-    return render(request, './catalog/index.html', context=context)
+    return render(request, 'index.html', context=context)
 
 
 class BookListView(generic.ListView):
@@ -74,3 +77,12 @@ class LoanedBooksByUserListView(LoginRequiredMixin,generic.ListView):
 
 class BookDetailView(generic.DetailView):
     model = Book
+
+@login_required
+@permission_required('catalog.can_mark_librarian','catalog.can_edit','can_view')
+def librarians(request):
+    allborrowedbooks = BookInstance.objects.filter(status__exact='o').order_by('due_back')
+    context = {
+        "allbooksborrowed" : allborrowedbooks,
+    }
+    return render(request,"librarian.html",context=context)
