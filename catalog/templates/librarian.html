@@ -10,6 +10,7 @@
       {% for bookinst in allbooksborrowed %}
       <li>
         <a href="{{ bookinst.book.get_absolute_url }}">({{ bookinst.book.title }})</a> borrowed by----{{bookinst.borrower.get_username}}  
+        {% if perms.catalog.can_mark_returned %}- <a href="{% url 'renew-book-librarian' bookinst.id %}">Renew</a>  {% endif %}
       </li>
       {% endfor %}
     </ul>
